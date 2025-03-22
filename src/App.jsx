@@ -1,12 +1,56 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { supabase } from '../supabaseClient';
+import { Auth } from '@supabase/auth-ui-react'
+  import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 function App() {
+  const [session, setSession] = useState(null);
 
-  return (
-    <>
-      <div>CodeBridge</div>
-    </>
-  )
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+
+    return () => subscription.unsubscribe()
+  }, []);
+
+  console.log(session?.user?.email);
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
+
+  const signUp = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+    })
+  }
+
+  if (!session) {
+    return (
+      <>
+      <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+      {/* <button onClick={signUp}>Sign in with Google</button> */}
+      </>
+    )
+  }
+  else {
+    return (
+      <div>
+        <h2>Welcome, {session?.user?.email}</h2>
+        <button onClick={signOut}>Sign Out</button>
+      </div>
+    )
+  }
 }
 
 export default App
