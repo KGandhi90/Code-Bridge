@@ -11,4 +11,7 @@ export default defineConfig({
       plugins: [tailwind()],
     },
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json']
+  },
 });

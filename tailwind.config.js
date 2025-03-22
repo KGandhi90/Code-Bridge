@@ -1,8 +1,8 @@
-module.exports = {
+export default {
   content: [
-    "./src/**/*.{html,js,ts,jsx,tsx}",
-    "app/**/*.{ts,tsx}",
-    "components/**/*.{ts,tsx}",
+    "./src/**/*.{html,js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
   ],
   theme: {
     extend: {

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { Card, CardContent } from "../../components/ui/card";
 
-export const Homepage = (): JSX.Element => {
+export const Homepage = () => {
   return (
     <div className="bg-white flex flex-row justify-center w-full">
       <div className="overflow-hidden border border-solid border-[#373535] [background:linear-gradient(180deg,rgba(32,29,124,1)_0%,rgba(55,53,53,1)_100%)] w-full max-w-[1440px] h-[1024px] relative">
