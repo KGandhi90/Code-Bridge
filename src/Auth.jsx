@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import { supabase } from '../supabaseClient';
-import { Auth } from '@supabase/auth-ui-react'
-  import { ThemeSupa } from '@supabase/auth-ui-shared'
 
-function App() {
+const Auth = () => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -23,7 +18,7 @@ function App() {
     return () => subscription.unsubscribe()
   }, []);
 
-  console.log(session?.user?.email);
+  console.log(session);
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -38,19 +33,20 @@ function App() {
   if (!session) {
     return (
       <>
-      <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
-      {/* <button onClick={signUp}>Sign in with Google</button> */}
+      {/* <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} /> */}
+      <button onClick={signUp}>Sign in with Google</button>
       </>
     )
   }
   else {
     return (
       <div>
-        <h2>Welcome, {session?.user?.email}</h2>
+        <img src={session?.user?.user_metadata?.avatar_url} alt="" />
+        <h2>Welcome, {session?.user?.user_metadata?.name}</h2>
         <button onClick={signOut}>Sign Out</button>
       </div>
     )
   }
 }
 
-export default App
+export default Auth;
