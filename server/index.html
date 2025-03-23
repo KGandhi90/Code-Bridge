@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Select Language</h1>
+    <select name="language" id="language">
+        <option value="python" id="python">Python</option>
+        <option value="javascript" id="javascript">JavaScript</option>
+    </select><br>
+    <textarea name="" id="code" cols="30" rows="10" placeholder="Write your code here"></textarea><br>
+    <button onclick="runCode()">Run Code</button>
+    <button onclick="runAi()">Explain</button><br><br>
+    <p id="result"></p>
+    <script>
+        async function runCode() {
+            const code = document.getElementById("code").value;
+            const language = document.getElementById("language").value;
+
+            const response = await fetch('https://codebridge-ogf3.onrender.com/output', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code, language })
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerHTML = JSON.stringify(result.run.stdout + result.run.stderr);
+            console.log(result);
+        }
+        async function runAi() {
+            const code = document.getElementById("code").value;
+            const planguage = document.getElementById("language").value;
+            const language = "Hindi";
+            const output = document.getElementById("result");
+
+        fetch('https://codebridge-ogf3.onrender.com/ai',{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:JSON.stringify({ code, planguage, language})
+        })
+        .then(response => response.json())
+        .then(out => {
+            output.innerHTML = out;
+        });
+        }
+    </script>
+</body>
+</html>

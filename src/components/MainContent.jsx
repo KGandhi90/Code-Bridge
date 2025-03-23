@@ -1,8 +1,16 @@
-import Navbar from "./Navbar";
+"use client"
 
-const MainContent = () => {
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { ThemeContext } from "../../App"
+
+const MainContent = ({ session }) => {
+  const { theme } = useContext(ThemeContext)
+
   return (
-    <div className="flex-1 text-white p-4 md:p-8 ml-16 h-screen overflow-hidden">
+    <div
+      className={`flex-1 p-4 md:p-8 ml-16 h-screen overflow-hidden ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+    >
       <div className="max-w-4xl h-full flex flex-col justify-between py-4">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -31,15 +39,26 @@ const MainContent = () => {
         </div>
 
         <div className="mt-4 space-y-1">
-          <p className="text-base">Sign up to start translating programming languages</p>
-          <p className="text-base">
-            Already have an account?{" "}
-            <span className="cursor-pointer hover:text-[#504aff] transition-colors">Log in</span>.
-          </p>
+          {!session ? (
+            <>
+              <p className="text-base">Sign up to start translating programming languages</p>
+              <p className="text-base">
+                Already have an account?{" "}
+                <Link to="/auth" className="cursor-pointer hover:text-[#504aff] transition-colors">
+                  Login
+                </Link>
+              </p>
+            </>
+          ) : (
+            <Link to="/compiler" className="text-base cursor-pointer hover:text-[#504aff] transition-colors">
+              Go to Compiler
+            </Link>
+          )}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainContent;
+export default MainContent
+

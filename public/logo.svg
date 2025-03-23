@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1772 875">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #504aff;
+      }
+
+      .cls-2 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-4 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 23px;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        fill: #26262b;
+      }
+
+      .cls-7 {
+        fill: #b3b3b3;
+        font-family: SourceSansRoman-Semibold, 'Source Sans Variable';
+        font-size: 172.1px;
+        font-variation-settings: 'wght' 600;
+        font-weight: 600;
+      }
+    </style>
+  </defs>
+  <rect class="cls-6" x="37" y="40" width="1691" height="798"/>
+  <g>
+    <line class="cls-4" x1="907.16" y1="447" x2="907.16" y2="151"/>
+    <polygon class="cls-4" points="1441.16 595 1251.16 299 907.16 141.75 569.5 296.1 563.16 299 373.16 595 907.16 447 1441.16 595"/>
+    <polygon class="cls-4" points="907.16 447 554.82 299 907.16 141.75 1251.16 299 907.16 447"/>
+    <circle class="cls-1" cx="563.16" cy="299" r="74"/>
+    <circle class="cls-1" cx="1251.16" cy="299" r="74"/>
+    <circle class="cls-1" cx="907.16" cy="151" r="74"/>
+    <circle class="cls-1" cx="907.16" cy="447" r="74"/>
+    <circle class="cls-1" cx="1441.16" cy="595" r="74"/>
+    <circle class="cls-1" cx="373.16" cy="595" r="74"/>
+  </g>
+  <text class="cls-7" transform="translate(397.33 700.18) scale(1.11 1)"><tspan x="0" y="0">Cod</tspan><tspan class="cls-5" x="290.68" y="0">e</tspan><tspan class="cls-3" x="379.66" y="0">-</tspan><tspan x="433.01" y="0">Brid</tspan><tspan class="cls-2" x="742.1" y="0">g</tspan><tspan x="828.84" y="0">e</tspan></text>
+</svg>

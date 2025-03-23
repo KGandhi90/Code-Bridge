@@ -1,20 +1,23 @@
-"use client";
+"use client"
+import { useState, useContext } from "react"
+import Navbar from "./Navbar"
+import MainContent from "./MainContent"
+import { ThemeContext } from "../../App"
 
-import { useState } from "react";
-import Navbar from "./Navbar";
-import MainContent from "./MainContent";
-
-export default function CodeBridgePage() {
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+export default function CodeBridgePage({ session }) {
+  const [isNavExpanded, setIsNavExpanded] = useState(false)
+  const { theme } = useContext(ThemeContext)
 
   const toggleNav = () => {
-    setIsNavExpanded(!isNavExpanded);
-  };
+    setIsNavExpanded(!isNavExpanded)
+  }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#373535]">
-      <Navbar isExpanded={isNavExpanded} toggleNav={toggleNav} />
-      <MainContent />
+    <div className={`flex h-screen overflow-hidden ${theme === "dark" ? "bg-[#373535]" : "bg-gray-100"}`}>
+      {/* Pass session to Navbar */}
+      <Navbar isExpanded={isNavExpanded} toggleNav={toggleNav} session={session} />
+      <MainContent session={session} />
     </div>
-  );
+  )
 }
+
