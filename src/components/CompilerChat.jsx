@@ -75,18 +75,18 @@ const CompilerChat = () => {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#373535]">
+    <div className={`flex h-screen overflow-hidden ${theme === "dark" ? "bg-[#373535]" : "bg-white"}`}>
       <Navbar isExpanded={isNavExpanded} toggleNav={() => setIsNavExpanded(!isNavExpanded)} session={session} />
 
       <div className="flex-1 ml-16 h-screen overflow-auto p-4">
         <div className="flex flex-col h-full">
           {/* Language Selection */}
           <div className="mb-4 flex items-center">
-            <label className="text-white mr-2">Language:</label>
+            <label className={`${ theme === "dark" ? "text-white" : "text-gray-900"} mr-2`}>Language:</label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-[#222222] text-white p-2 rounded border border-[#504aff]"
+              className={`${theme === "dark" ? "bg-[#222222] text-white " : "bg-white text-gray-900"} p-2 rounded border-2 border-[#504aff]`}
             >
               <option value="python">Python</option>
               <option value="javascript">JavaScript</option>
@@ -97,14 +97,14 @@ const CompilerChat = () => {
           <div className="flex flex-col md:flex-row gap-4 flex-1">
             {/* Code Editor */}
             <div className="flex-1 flex flex-col">
-              <h2 className="text-white text-xl mb-2">Code Editor</h2>
+              <h2 className={`${theme === "dark" ? "text-white" : "text-gray-900"} text-xl mb-2`}>Code Editor</h2>
               <textarea
                 value={code}
                 onChange={(e) => {
                   setCode(e.target.value);
                   setExplanation("");
                 }}
-                className="flex-1 bg-[#222222] text-white p-4 font-mono resize-none rounded"
+                className={`flex-1 ${theme === "dark" ? "bg-[#222222] text-white" : "bg-gray-300 text-gray-900"} p-4 font-mono resize-none rounded placeholder:text-gray-900`}
                 placeholder="Write your code here..."
               />
               <button
@@ -117,24 +117,24 @@ const CompilerChat = () => {
 
             {/* Output */}
             <div className="flex-1 flex flex-col">
-              <h2 className="text-white text-xl mb-2">Output</h2>
-              <div className="flex-1 bg-[#222222] text-white p-4 font-mono rounded overflow-auto">
+              <h2 className={`${theme === "dark" ? "text-white" : "text-gray-900"} text-xl mb-2`}>Output</h2>
+              <div className={`flex-1 ${theme === "dark" ? "bg-[#222222] text-white" : "bg-gray-300 text-gray-900"} p-4 font-mono rounded overflow-auto`}>
                 {output || "Your output will appear here..."}
               </div>
             </div>
           </div>
 
           {/* Explanation Section */}
-          <div className="mt-4 bg-[#222222] p-4 rounded">
-            <h2 className="text-white text-xl mb-2">Code Explanation</h2>
+          <div className={`mt-4 ${theme === "dark" ? "bg-[#222222]" : "bg-gray-300"} p-4 rounded`}>
+            <h2 className={`${theme === "dark" ? "text-white" : "text-gray-900"} text-xl mb-2`}>Code Explanation</h2>
 
             {/* Language Selection for Explanation */}
             <div className="mb-2 flex items-center">
-              <label className="text-white mr-2">Translate to:</label>
+              <label className={`${theme === "dark" ? "text-white" : "text-gray-900"} mr-2`}>Translate to:</label>
               <select
                 value={translateLanguage}
                 onChange={(e) => setTranslateLanguage(e.target.value)}
-                className="bg-[#222222] text-white p-2 rounded border border-[#504aff]"
+                className={`${theme === "dark" ? "bg-[#222222] text-white" : "bg-gray-300 text-gray-900"} p-2 rounded border-2 border-[#504aff]`}
               >
                 <option value="hindi">Hindi</option>
                 <option value="marathi">Marathi</option>
@@ -149,7 +149,7 @@ const CompilerChat = () => {
             </div>
 
             {/* Explanation Output */}
-            <div className="bg-[#1a1a1a] text-white p-4 font-mono rounded overflow-auto min-h-[100px]">
+            <div className={`${theme === "dark" ? "bg-[#1a1a1a] text-white" : "bg-[#bfc3c9] text-gray-900"} p-4 font-mono rounded overflow-auto min-h-[100px]`}>
               {explanation || "Code explanation will appear here..."}
             </div>
           </div>
