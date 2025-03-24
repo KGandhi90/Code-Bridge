@@ -1,6 +1,6 @@
 # CodeBridge
 
-![CodeBridge Logo](logo.svg)
+![CodeBridge Logo](./public/logo.jpg)
 
 ## 🌍 Breaking Language Barriers in Programming
 
@@ -79,9 +79,10 @@ We welcome contributions! If you’d like to improve CodeBridge, feel free to fo
 
 ## 👥 Collaborators
 
-Meet the awesome team behind CodeBridge:
+### Meet the awesome team behind CodeBridge:
+### CSS [Coders Struggling Silently]
 
-- **Sujal Bishnio** – [GitHub](https://github.com/bishniosujal99)
+- **Sujal Bishnoi** – [GitHub](https://github.com/bishniosujal99)
 - **Manav Shirali** – [GitHub](https://github.com/manav-os)
 - **Saara Gouse** – [GitHub](https://github.com/SaaraGouse)
 - **Kevin Gandhi** – [GitHub](https://github.com/KGandhi90)
