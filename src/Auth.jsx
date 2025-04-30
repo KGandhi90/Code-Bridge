@@ -1,51 +1,69 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { supabase } from "../supabaseClient"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { supabase } from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
-  const [session, setSession] = useState(null)
-  const navigate = useNavigate()
+  const [session, setSession] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      if (session) {
-        // If user is already logged in, redirect to compiler page
-        navigate("/compiler")
-      }
-    })
+    if (window.location.hash && window.location.hash.includes("access_token")) {
+      // Let Supabase handle the token in the URL
+      const { data: { session } } = supabase.auth.getSession();
+      
+      // Clean the URL after successful login (needs to happen after Supabase processes the token)
+      setTimeout(() => {
+        window.history.replaceState({}, document.title, '/compiler');
+        navigate("/compiler");
+      }, 100);
+    }
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      if (session) {
-        // When auth state changes and user is logged in, redirect to compiler page
-        navigate("/compiler")
-      }
-    })
+    // Check session immediately after page load
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setSession(session);
 
-    return () => subscription.unsubscribe()
-  }, [navigate])
+      if (session) {
+        // Clean the URL after successful login
+        window.history.replaceState({}, document.title, '/compiler');
+        navigate("/compiler"); // Redirect to compiler page if logged in
+      }
+    };
+
+    // Run check session on component mount
+    checkSession();
+
+    // Listen for changes in auth state (e.g., login/logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session) {
+        // Clean the URL and redirect after successful login
+        window.history.replaceState({}, document.title, '/compiler');
+        navigate("/compiler");
+      }
+    });
+
+    return () => subscription.unsubscribe(); // Clean up subscription when component unmounts
+  }, [navigate]);
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
+    const { error } = await supabase.auth.signOut();
     if (!error) {
-      navigate("/")
+      navigate("/");
     }
-  }
+  };
 
   const signUp = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin + "/compiler",
+        redirectTo: window.location.origin, // Remove /compiler from redirectTo
       },
-    })
-  }
-
+    });
+  };
+  
   if (!session) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#373535]">
@@ -75,4 +93,3 @@ const Auth = () => {
 }
 
 export default Auth
-
